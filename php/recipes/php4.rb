@@ -1,9 +1,9 @@
 #
-# Cookbook Name:: django
+# Author::  Joshua Timberman (<joshua@opscode.com>)
+# Cookbook Name:: php
 # Recipe:: default
-# Author:: Joshua Timberman (<joshua@opscode.com>)
 #
-# Copyright 2010, Opscode, Inc
+# Copyright 2009, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,4 +18,15 @@
 # limitations under the License.
 #
 
-default[:django][:web_server] = "mod_wsgi"
+packages = value_for_platform(
+  ["centos", "redhat", "fedora", "suse"] => {
+    "default" => []
+  },
+  "default" => %w{ php4 php4-mysql php4-ldap php4-gd }
+)
+
+pacakges.each do |pkg|
+  package pkg do
+    action :upgrade
+  end
+end

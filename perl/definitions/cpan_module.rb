@@ -1,9 +1,8 @@
 #
-# Cookbook Name:: django
-# Recipe:: default
-# Author:: Joshua Timberman (<joshua@opscode.com>)
+# Cookbook Name:: perl
+# Definition:: cpan_module
 #
-# Copyright 2010, Opscode, Inc
+# Copyright 2009, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,4 +17,15 @@
 # limitations under the License.
 #
 
-default[:django][:web_server] = "mod_wsgi"
+define :cpan_module, :force => nil do
+  execute "install-#{params[:name]}" do
+    if params[:force] 
+      command "echo force install #{params[:name]} | /usr/bin/cpan"
+    else
+      command "/usr/local/bin/cpan_install #{params[:name]}"
+    end
+    cwd "/root"
+    path [ "/usr/local/bin", "/usr/bin", "/bin" ]
+    not_if "perl -m#{params[:name]} -e ''"
+  end
+end

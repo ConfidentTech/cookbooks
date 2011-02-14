@@ -1,9 +1,9 @@
 #
-# Cookbook Name:: django
-# Recipe:: default
-# Author:: Joshua Timberman (<joshua@opscode.com>)
+# Author::  Joshua Timberman (<joshua@opscode.com>)
+# Cookbook Name:: php
+# Recipe:: php5-cgi
 #
-# Copyright 2010, Opscode, Inc
+# Copyright 2009, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,4 +18,17 @@
 # limitations under the License.
 #
 
-default[:django][:web_server] = "mod_wsgi"
+include_recipe "php::module_mysql"
+include_recipe "php::module_sqlite3"
+include_recipe "php::module_memcache"
+include_recipe "php::module_gd"
+include_recipe "php::module_pgsql"
+
+case node[:platform]
+  when "centos", "redhat", "fedora", "suse"
+    #placeholder modify when available
+  when "debian", "ubuntu"
+    package "php5-cgi" do
+      action :upgrade
+    end
+end

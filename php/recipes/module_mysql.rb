@@ -1,9 +1,9 @@
 #
-# Cookbook Name:: django
-# Recipe:: default
-# Author:: Joshua Timberman (<joshua@opscode.com>)
+# Author::  Joshua Timberman (<joshua@opscode.com>)
+# Cookbook Name:: php
+# Recipe:: module_mysql
 #
-# Copyright 2010, Opscode, Inc
+# Copyright 2009, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,4 +18,13 @@
 # limitations under the License.
 #
 
-default[:django][:web_server] = "mod_wsgi"
+pack = value_for_platform(
+  [ "centos", "redhat", "fedora", "suse" ] => {
+    "default" => "php-mysql"
+  },
+  "default" => "php5-mysql"
+)
+
+package pack do
+  action :upgrade
+end

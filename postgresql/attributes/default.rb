@@ -29,12 +29,12 @@ when "debian"
 
 when "ubuntu"
 
-  if platform_version.to_f <= 9.04
-    default[:postgresql][:version] = "8.3"
-  else
-    default[:postgresql][:version] = "8.4"
-  end
-
+  # if platform_version.to_f <= 9.04
+  #   default[:postgresql][:version] = "8.3"
+  # else
+  #   default[:postgresql][:version] = "8.4"
+  # end
+  default[:postgresql][:version] = "8.3"
   set[:postgresql][:dir] = "/etc/postgresql/#{node[:postgresql][:version]}/main"
 
 when "fedora"
