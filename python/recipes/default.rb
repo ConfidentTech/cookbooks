@@ -17,14 +17,14 @@
 # limitations under the License.
 #
 
-
+# TODO: Move to individual recipes
 %w{
   libapache2-mod-wsgi python2.6 scons babel
 }.each do |pkg|
   action :install
 end
 
-# processing
+# TODO: Move to individual recipes
 %w{ 
   dev imaging matplotlib matplotlib-data matplotlib-doc mysqldb 
   numpy numpy-ext paramiko scipy setuptools sqlite mako
