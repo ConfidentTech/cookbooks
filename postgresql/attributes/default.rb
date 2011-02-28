@@ -16,9 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 case platform
 when "debian"
-
   if platform_version.to_f == 5.0
     default[:postgresql][:version] = "8.3"
   elsif platform_version =~ /.*sid/
@@ -28,13 +28,12 @@ when "debian"
   set[:postgresql][:dir] = "/etc/postgresql/#{node[:postgresql][:version]}/main"
 
 when "ubuntu"
+  if platform_version.to_f <= 10.10
+    default[:postgresql][:version] = "8.3"
+  else
+    default[:postgresql][:version] = "8.4"
+  end
 
-  # if platform_version.to_f <= 9.04
-  #   default[:postgresql][:version] = "8.3"
-  # else
-  #   default[:postgresql][:version] = "8.4"
-  # end
-  default[:postgresql][:version] = "8.3"
   set[:postgresql][:dir] = "/etc/postgresql/#{node[:postgresql][:version]}/main"
 
 when "fedora"
@@ -44,12 +43,12 @@ when "fedora"
   else
     default[:postgresql][:version] = "8.4"
   end
-
+  
   set[:postgresql][:dir] = "/var/lib/pgsql/data"
 
 when "redhat","centos"
 
-  default[:postgresql][:version] = "8.4"
+  default[:postgresql][:version] = "8.3" # TODO: 8.4
   set[:postgresql][:dir] = "/var/lib/pgsql/data"
 
 when "suse"
@@ -59,10 +58,10 @@ when "suse"
   else
     default[:postgresql][:version] = "8.4"
   end
-
+  # default[:postgresql][:version] = "8.3"
   set[:postgresql][:dir] = "/var/lib/pgsql/data"
 
 else
-  default[:postgresql][:version] = "8.4"
+  default[:postgresql][:version]    = "8.3"
   set[:postgresql][:dir]            = "/etc/postgresql/#{node[:postgresql][:version]}/main"
 end

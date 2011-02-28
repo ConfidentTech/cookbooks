@@ -17,20 +17,20 @@
 # limitations under the License.
 #
 
-# TODO: Move to individual recipes
+
 %w{
-  libapache2-mod-wsgi python2.6 scons babel
+  libapache2-mod-wsgi python2.6
 }.each do |pkg|
-  action :install
+  package "#{pkg}" do
+    action :install
+  end
 end
 
-# TODO: Move to individual recipes
+# processing
 %w{ 
   dev imaging matplotlib matplotlib-data matplotlib-doc mysqldb 
   numpy numpy-ext paramiko scipy setuptools sqlite mako
-  openid dateutil twill psycopg2 cherrypy3 django jinja2
-  virtualenv werkzeug boto pip coverage
-  lxml paver nose mox lxml-dbg
+  openid cherrypy3 pip coverage lxml-dbg
 }.each do |pkg|
   package "python-#{pkg}" do
     action :install
