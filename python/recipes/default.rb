@@ -19,7 +19,7 @@
 
 
 %w{
-  libapache2-mod-wsgi python2.6
+  python2.6 libapache2-mod-wsgi
 }.each do |pkg|
   package "#{pkg}" do
     action :install
