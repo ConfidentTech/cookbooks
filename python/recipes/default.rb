@@ -28,9 +28,8 @@ end
 
 # processing
 %w{ 
-  dev imaging matplotlib matplotlib-data matplotlib-doc mysqldb 
-  numpy numpy-ext paramiko scipy setuptools sqlite mako
-  openid cherrypy3 pip coverage lxml-dbg
+  dev imaging paramiko scipy setuptools sqlite mako
+  openid cherrypy3 pip lxml-dbg
 }.each do |pkg|
   package "python-#{pkg}" do
     action :install
