@@ -22,9 +22,9 @@ package "postfix" do
   action :install
 end
 
-# service "postfix" do
-#   action :enable
-# end
+service "postfix" do
+  action :enable
+end
 
 %w{main master}.each do |cfg|
   template "/etc/postfix/#{cfg}.cf" do
