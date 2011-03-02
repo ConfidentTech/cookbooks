@@ -22,9 +22,9 @@ package "postfix" do
   action :install
 end
 
-service "postfix" do
-  action :enable
-end
+# service "postfix" do
+#   action :enable
+# end
 
 %w{main master}.each do |cfg|
   template "/etc/postfix/#{cfg}.cf" do
@@ -32,6 +32,6 @@ end
     owner "root"
     group "root"
     mode 0644
-    notifies :restart, resources(:service => "postfix")
+    notifies :start, resources(:service => "postfix")
   end
 end
