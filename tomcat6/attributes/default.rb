@@ -44,7 +44,11 @@ set_unless[:tomcat6][:version]          = "6.0.18"
 set_unless[:tomcat6][:with_native]      = false
 
 if languages[:java]
-  set_unless[:tomcat6][:with_snmp]      = !languages[:java][:runtime][:name].match(/^OpenJDK/)
+  if languages[:java][:runtime]
+    set_unless[:tomcat6][:with_snmp]      = !languages[:java][:runtime][:name].match(/^OpenJDK/)
+  else
+    set_unless[:tomcat6][:with_snmp]      = false
+  end
 else
   set_unless[:tomcat6][:with_snmp]      = false
 end
